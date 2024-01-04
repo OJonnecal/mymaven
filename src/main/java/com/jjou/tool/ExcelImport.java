@@ -1,8 +1,8 @@
 package com.jjou.tool;
 
 import com.jjou.domain.QuestionAndAnswer;
-import com.jjou.util.ExcelImportUtil;
-import com.jjou.util.MybatisUtil;
+import com.jjou.util.ExcelImportUtils;
+import com.jjou.util.MybatisUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -39,12 +39,12 @@ public class ExcelImport {
 
         try (FileInputStream fis = new FileInputStream(new File("D:\\workplace\\tmp\\test.xlsx")); //excel文件地址
              Workbook workbook = new XSSFWorkbook(fis);
-             SqlSession sqlSession = MybatisUtil.getSqlSession()
+             SqlSession sqlSession = MybatisUtils.getSqlSession()
         ){
             //获取第一张sheet
             Sheet sheet = workbook.getSheetAt(0);
             //获取文件数据
-            List<QuestionAndAnswer> list = ExcelImportUtil.getListFromExcel(sheet, QuestionAndAnswer.class, map);
+            List<QuestionAndAnswer> list = ExcelImportUtils.getListFromExcel(sheet, QuestionAndAnswer.class, map);
 
             //数据操作
 //            for (QuestionAndAnswer t : list) {
