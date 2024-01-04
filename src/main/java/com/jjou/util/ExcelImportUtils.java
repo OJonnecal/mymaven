@@ -15,7 +15,7 @@ import java.util.*;
  * @Create 2023/12/27 10:42
  * @Version 1.0
  */
-public class ExcelImportUtil {
+public class ExcelImportUtils {
 
     public static <T> List<T> getListFromExcel(Sheet sheet , Class cs , Map<String , String> map) throws Exception {
         T e;

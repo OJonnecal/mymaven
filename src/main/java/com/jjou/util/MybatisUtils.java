@@ -15,7 +15,7 @@ import java.io.InputStream;
  * @Create 2023/12/27 14:43
  * @Version 1.0
  */
-public class MybatisUtil {
+public class MybatisUtils {
 
     public static SqlSession getSqlSession() throws IOException {
         String config = "mybatis-config.xml";
