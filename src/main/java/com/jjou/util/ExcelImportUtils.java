@@ -61,7 +61,7 @@ public class ExcelImportUtils {
                 throw new Exception("请检查首行数据是否正确。");
             }
         }
-        return  paramsList;
+        return paramsList;
     }
 
     public static List<Class> getParamsType(Class cs, List<String> paramsList){

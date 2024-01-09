@@ -19,6 +19,7 @@ public class QuestionAndAnswer {
     private String secondContent;
     private String thirdContent;
     private String fourthContent;
+    private String fifthContent;
     private String keyword;
     private String title;
     private String answer;

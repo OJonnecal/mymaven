@@ -45,6 +45,7 @@
             <if test="secondContent != null and secondContent != ''">second_content,</if>
             <if test="thirdContent != null and thirdContent != ''">third_content,</if>
             <if test="fourthContent != null and fourthContent != ''">fourth_content,</if>
+            <if test="fifthContent != null and fifthContent != ''">fifth_content,</if>
             <if test="keyword != null and keyword != ''">keyword,</if>
             <if test="title != null and title != ''">title,</if>
             <if test="answer != null and answer != ''">answer,</if>
@@ -65,6 +66,7 @@
             <if test="secondContent != null and secondContent != ''">#{secondContent},</if>
             <if test="thirdContent != null and thirdContent != ''">#{thirdContent},</if>
             <if test="fourthContent != null and fourthContent != ''">#{fourthContent},</if>
+            <if test="fifthContent != null and fifthContent != ''">#{fifthContent},</if>
             <if test="keyword != null and keyword != ''">#{keyword},</if>
             <if test="title != null and title != ''">#{title},</if>
             <if test="answer != null and answer != ''">#{answer},</if>
