@@ -37,7 +37,7 @@ public class ExcelTest {
         map.put("来源", "source");
         map.put("问题", "question");
 
-        try (FileInputStream fis = new FileInputStream(new File("D:\\workplace\\tmp\\test2.xlsx"));
+        try (FileInputStream fis = new FileInputStream(new File("D:\\workplace\\tmp\\test4.xlsx"));
              Workbook workbook = new XSSFWorkbook(fis);
              SqlSession sqlSession = MybatisUtils.getSqlSession()
              ){
