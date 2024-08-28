@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+    sql映射文件（sql mapper）：编写SQL语句，mybatis负责执行这些SQL语句
+    1、指定约束文件
+    <!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+     mybatis-3-mapper.dtd：约束文件名称
+    2、约束文件作用：限制，检查当前文件中出现的标签，属性必须符合mybatis的要求
+    3、<mapper>：当前文件根标签（必须的）
+       namespace：命名空间（唯一值，自定义字符串；要求使用dao接口的全限定名称）
+       全限定类名：就是类名全称，带包路径的用点隔开，如: java.lang.String
+          即全限定名 = 包名 + 类型
+       非限定类名也叫短名，就是我们平时说的类名，不带包的，如：String
+    4、数据库增删改查特定标签
+       <select>：查询，select语句
+       <update>：更新，update语句
+       <insert>：插入，insert语句
+       <delete>：删除，delete语句
+-->
+
+<mapper namespace="com.jjou.dao.AssetsDao">
+
+    <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id" parameterType="com.jjou.domain.Assets">
+        INSERT INTO assets
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="null != assetsCode and '' != assetsCode">
+                assets_code,
+            </if>
+            <if test="null != physicalCode and '' != physicalCode">
+                physical_code,
+            </if>
+            <if test="null != inspectId ">
+                inspect_id,
+            </if>
+            <if test="null != assetsType ">
+                assets_type,
+            </if>
+            <if test="null != assetsName and '' != assetsName">
+                assets_name,
+            </if>
+            <if test="null != assetsQuantity ">
+                assets_quantity,
+            </if>
+            <if test="null != assetsBrand and '' != assetsBrand">
+                assets_brand,
+            </if>
+            <if test="null != acquisitionTime ">
+                acquisition_time,
+            </if>
+            <if test="null != propertyUnit ">
+                property_unit,
+            </if>
+            <if test="null != status ">
+                status,
+            </if>
+            <if test="null != assetsPrice ">
+                assets_price,
+            </if>
+            <if test="null != assetsOriginPrice ">
+                assets_origin_price,
+            </if>
+            <if test="null != assetsSpecification and '' != assetsSpecification">
+                assets_specification,
+            </if>
+            <if test="null != dutyDeptName and '' != dutyDeptName">
+                duty_dept_name,
+            </if>
+            <if test="null != dutyUserName and '' != dutyUserName">
+                duty_user_name,
+            </if>
+            <if test="null != claimTime ">
+                claim_time,
+            </if>
+            <if test="null != storageLocation and '' != storageLocation">
+                storage_location,
+            </if>
+            <if test="null != beginUseTime ">
+                begin_use_time,
+            </if>
+            <if test="null != useLife ">
+                use_life,
+            </if>
+            <if test="null != addWay and '' != addWay">
+                add_way,
+            </if>
+            <if test="null != remark and '' != remark">
+                remark,
+            </if>
+            <if test="null != assetsImageUrl and '' != assetsImageUrl">
+                assets_image_url,
+            </if>
+            <if test="null != delFlag ">
+                del_flag,
+            </if>
+            <if test="null != createBy and '' != createBy">
+                create_by,
+            </if>
+            <if test="null != createTime ">
+                create_time,
+            </if>
+            <if test="null != updateBy and '' != updateBy">
+                update_by,
+            </if>
+            <if test="null != updateTime ">
+                update_time
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="null != assetsCode and '' != assetsCode">
+                #{assetsCode},
+            </if>
+            <if test="null != physicalCode and '' != physicalCode">
+                #{physicalCode},
+            </if>
+            <if test="null != inspectId ">
+                #{inspectId},
+            </if>
+            <if test="null != assetsType ">
+                #{assetsType},
+            </if>
+            <if test="null != assetsName and '' != assetsName">
+                #{assetsName},
+            </if>
+            <if test="null != assetsQuantity ">
+                #{assetsQuantity},
+            </if>
+            <if test="null != assetsBrand and '' != assetsBrand">
+                #{assetsBrand},
+            </if>
+            <if test="null != acquisitionTime ">
+                #{acquisitionTime},
+            </if>
+            <if test="null != propertyUnit ">
+                #{propertyUnit},
+            </if>
+            <if test="null != status ">
+                #{status},
+            </if>
+            <if test="null != assetsPrice ">
+                #{assetsPrice},
+            </if>
+            <if test="null != assetsOriginPrice ">
+                #{assetsOriginPrice},
+            </if>
+            <if test="null != assetsSpecification and '' != assetsSpecification">
+                #{assetsSpecification},
+            </if>
+            <if test="null != dutyDeptName and '' != dutyDeptName">
+                #{dutyDeptName},
+            </if>
+            <if test="null != dutyUserName and '' != dutyUserName">
+                #{dutyUserName},
+            </if>
+            <if test="null != claimTime ">
+                #{claimTime},
+            </if>
+            <if test="null != storageLocation and '' != storageLocation">
+                #{storageLocation},
+            </if>
+            <if test="null != beginUseTime ">
+                #{beginUseTime},
+            </if>
+            <if test="null != useLife ">
+                #{useLife},
+            </if>
+            <if test="null != addWay and '' != addWay">
+                #{addWay},
+            </if>
+            <if test="null != remark and '' != remark">
+                #{remark},
+            </if>
+            <if test="null != assetsImageUrl and '' != assetsImageUrl">
+                #{assetsImageUrl},
+            </if>
+            <if test="null != delFlag ">
+                #{delFlag},
+            </if>
+            <if test="null != createBy and '' != createBy">
+                #{createBy},
+            </if>
+            <if test="null != createTime ">
+                #{createTime},
+            </if>
+            <if test="null != updateBy and '' != updateBy">
+                #{updateBy},
+            </if>
+            <if test="null != updateTime ">
+                #{updateTime}
+            </if>
+        </trim>
+    </insert>
+
+    <insert id="insertIns" useGeneratedKeys="true" keyColumn="id" keyProperty="id" parameterType="com.jjou.domain.InspectEquipment">
+        INSERT INTO inspect_equipment
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="null != equipmentName and '' != equipmentName">
+                equipment_name,
+            </if>
+            <if test="null != inDate ">
+                in_date,
+            </if>
+            <if test="null != expirationDay ">
+                expiration_day,
+            </if>
+            <if test="null != inspectCycle ">
+                inspect_cycle,
+            </if>
+            <if test="null != inspectDate ">
+                inspect_date,
+            </if>
+            <if test="null != checkFlag ">
+                check_flag,
+            </if>
+            <if test="null != attachmentUrl and '' != attachmentUrl">
+                attachment_url,
+            </if>
+            <if test="null != remark and '' != remark">
+                remark,
+            </if>
+            <if test="null != delFlag ">
+                del_flag,
+            </if>
+            <if test="null != createBy and '' != createBy">
+                create_by,
+            </if>
+            <if test="null != createTime ">
+                create_time,
+            </if>
+            <if test="null != updateBy and '' != updateBy">
+                update_by,
+            </if>
+            <if test="null != updateTime ">
+                update_time
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="null != equipmentName and '' != equipmentName">
+                #{equipmentName},
+            </if>
+            <if test="null != inDate ">
+                #{inDate},
+            </if>
+            <if test="null != expirationDay ">
+                #{expirationDay},
+            </if>
+            <if test="null != inspectCycle ">
+                #{inspectCycle},
+            </if>
+            <if test="null != inspectDate ">
+                #{inspectDate},
+            </if>
+            <if test="null != checkFlag ">
+                #{checkFlag},
+            </if>
+            <if test="null != attachmentUrl and '' != attachmentUrl">
+                #{attachmentUrl},
+            </if>
+            <if test="null != remark and '' != remark">
+                #{remark},
+            </if>
+            <if test="null != delFlag ">
+                #{delFlag},
+            </if>
+            <if test="null != createBy and '' != createBy">
+                #{createBy},
+            </if>
+            <if test="null != createTime ">
+                #{createTime},
+            </if>
+            <if test="null != updateBy and '' != updateBy">
+                #{updateBy},
+            </if>
+            <if test="null != updateTime ">
+                #{updateTime}
+            </if>
+        </trim>
+    </insert>
+
+    <update id="update" parameterType="com.jjou.domain.Assets">
+        UPDATE assets
+        <set>
+            <if test="null != assetsCode and '' != assetsCode">assets_code = #{assetsCode},</if>
+            <if test="null != physicalCode and '' != physicalCode">physical_code = #{physicalCode},</if>
+            <if test="null != inspectId ">inspect_id = #{inspectId},</if>
+            <if test="null != assetsType ">assets_type = #{assetsType},</if>
+            <if test="null != assetsName and '' != assetsName">assets_name = #{assetsName},</if>
+            <if test="null != assetsQuantity ">assets_quantity = #{assetsQuantity},</if>
+            <if test="null != assetsBrand and '' != assetsBrand">assets_brand = #{assetsBrand},</if>
+            <if test="null != acquisitionTime ">acquisition_time = #{acquisitionTime},</if>
+            <if test="null != propertyUnit ">property_unit = #{propertyUnit},</if>
+            <if test="null != status ">status = #{status},</if>
+            <if test="null != assetsPrice ">assets_price = #{assetsPrice},</if>
+            <if test="null != assetsOriginPrice ">assets_origin_price = #{assetsOriginPrice},</if>
+            <if test="null != assetsSpecification and '' != assetsSpecification">assets_specification = #{assetsSpecification},</if>
+            <if test="null != dutyDeptName and '' != dutyDeptName">duty_dept_name = #{dutyDeptName},</if>
+            <if test="null != dutyUserName and '' != dutyUserName">duty_user_name = #{dutyUserName},</if>
+            <if test="null != claimTime ">claim_time = #{claimTime},</if>
+            <if test="null != storageLocation and '' != storageLocation">storage_location = #{storageLocation},</if>
+            <if test="null != beginUseTime ">begin_use_time = #{beginUseTime},</if>
+            <if test="null != useLife ">use_life = #{useLife},</if>
+            <if test="null != addWay and '' != addWay">add_way = #{addWay},</if>
+            <if test="null != remark and '' != remark">remark = #{remark},</if>
+            <if test="null != assetsImageUrl and '' != assetsImageUrl">assets_image_url = #{assetsImageUrl},</if>
+            <if test="null != delFlag ">del_flag = #{delFlag},</if>
+            <if test="null != createBy and '' != createBy">create_by = #{createBy},</if>
+            <if test="null != createTime ">create_time = #{createTime},</if>
+            <if test="null != updateBy and '' != updateBy">update_by = #{updateBy},</if>
+            <if test="null != updateTime ">update_time = #{updateTime}</if>
+        </set>
+        WHERE assets_code = #{assetsCode}
+    </update>
+
+    <select id="selectInsCountById" resultType="com.jjou.domain.InspectEquipment">
+        select * from inspect_equipment
+        where equipment_name = #{equipmentName}
+    </select>
+</mapper>

@@ -39,7 +39,7 @@
 
     <!--插入操作，字段名和Java实体类中字段保持一致-->
     <insert id="insert" parameterType="com.jjou.domain.QuestionAndAnswer">
-        insert into t_cfg_question_and_answer
+        insert IGNORE into t_cfg_question_and_answer
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="firstContent != null and firstContent != ''">first_content,</if>
             <if test="secondContent != null and secondContent != ''">second_content,</if>

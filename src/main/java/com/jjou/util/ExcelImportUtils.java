@@ -1,11 +1,11 @@
 package com.jjou.util;
 
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellType;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
+import com.mysql.cj.util.StringUtils;
+import org.apache.poi.ss.usermodel.*;
 
 import java.lang.reflect.Field;
+import java.math.BigDecimal;
+import java.text.ParseException;
 import java.util.*;
 
 /**
@@ -32,11 +32,19 @@ public class ExcelImportUtils {
             e = (T) cs.newInstance();
             //遍历单元行的每一列 设置值给泛型e
             for (int j = 0; j < row.getLastCellNum(); j++) {
-                //获取一个单元格
-                Cell cell = row.getCell(j);
-                //调用泛型对象的set方法设置单元格里的值 这也就是为什么我们要获取属性顺序以及其对应的类型
-                cs.getMethod(getSetterMethodName(paramsList.get(j)) , typeClass.get(j))
-                        .invoke(e , getValueFromType(cell , typeClass.get(j)));
+                try {
+                    //获取一个单元格
+                    Cell cell = row.getCell(j);
+                    if (cell == null) {
+                        continue;
+                    }
+                    //调用泛型对象的set方法设置单元格里的值 这也就是为什么我们要获取属性顺序以及其对应的类型
+                    cs.getMethod(getSetterMethodName(paramsList.get(j)) , typeClass.get(j))
+                            .invoke(e , getValueFromType(cell , typeClass.get(j)));
+                } catch (Exception ex) {
+                    System.out.println("错误数据:" + e.toString());
+                    throw new RuntimeException(ex);
+                }
             }
             list.add(e);
         }
@@ -58,6 +66,7 @@ public class ExcelImportUtils {
                 //获取对应属性的set方法
                 paramsList.add(map.get(str));
             } else {
+                System.out.println("错误数据:" + str);
                 throw new Exception("请检查首行数据是否正确。");
             }
         }
@@ -87,7 +96,10 @@ public class ExcelImportUtils {
         return "set" + new String(chars);
     }
 
-    public static Object getValueFromType(Cell cell, Class cs){
+    public static Object getValueFromType(Cell cell, Class cs) throws ParseException {
+        if (cell == null) {
+            return "";
+        }
         //字符串类型
         if (String.class.equals(cs)) {
             //设置对应的类型
@@ -98,7 +110,11 @@ public class ExcelImportUtils {
             cell.setCellType(CellType.BOOLEAN);
             return cell.getBooleanCellValue();
         }else if (Date.class.equals(cs)) {
-            //日期类型 此种数据并未测试
+            //日期类型
+//            DataFormatter dataFormatter = new DataFormatter();
+//            String cellValue = dataFormatter.formatCellValue(cell);
+//            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY.MM.DD");
+//            Date date = simpleDateFormat.parse(cellValue);
             return cell.getDateCellValue();
         } else if (int.class.equals(cs) || Integer.class.equals(cs)){
             //int类型
@@ -108,8 +124,21 @@ public class ExcelImportUtils {
             //double类型
             cell.setCellType(CellType.NUMERIC);
             return cell.getNumericCellValue();
+        }else if(long.class.equals(cs) || Long.class.equals(cs)) {
+            //long类型
+            cell.setCellType(CellType.NUMERIC);
+            return cell.getNumericCellValue();
         }
         //这里还可以填充其他类型
+        else if(BigDecimal.class.equals(cs)) {
+            //BigDecimal类型
+            DataFormatter dataFormatter = new DataFormatter();
+            String cellValue = dataFormatter.formatCellValue(cell);
+            if(StringUtils.isNullOrEmpty(cellValue)){
+                return BigDecimal.valueOf(0);
+            }
+            return BigDecimal.valueOf(Double.parseDouble(cellValue));
+        }
         else {
             //未知类型 默认为错误类型
             return cell.getErrorCellValue();

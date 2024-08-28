@@ -48,11 +48,12 @@
                 <!-- 数据库驱动类名 -->
                 <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
                 <!-- 连接数据库的URL字符串 -->
-                <property name="url" value="jdbc:mysql://localhost:3306/design?useUnicode=true&amp;characterEncoding=utf8&amp;zeroDateTimeBehavior=convertToNull&amp;useSSL=false&amp;serverTimezone=GMT%2B8"/>
+                <property name="url"
+                          value="jdbc:mysql://localhost:3306/ema_system?useUnicode=true&amp;characterEncoding=utf8&amp;zeroDateTimeBehavior=convertToNull&amp;useSSL=false&amp;serverTimezone=GMT%2B8"/>
                 <!-- 访问数据库的用户名 -->
                 <property name="username" value="root"/>
                 <!-- 访问数据库的密码 -->
-                <property name="password" value="oujiajun123"/>
+                <property name="password" value="123456"/>
             </dataSource>
         </environment>
 
@@ -76,5 +77,6 @@
                 从类路径开始的路径信息（target/classes）类路径
         -->
         <mapper resource="com\jjou\dao\QuestionAndAnswerDao.xml"/>
+        <mapper resource="com\jjou\dao\AssetsDao.xml"/>
     </mappers>
 </configuration>
