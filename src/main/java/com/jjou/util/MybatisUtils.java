@@ -22,7 +22,6 @@ public class MybatisUtils {
         InputStream ins = Resources.getResourceAsStream(config);
         SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
         SqlSessionFactory factory = builder.build(ins);
-        SqlSession sqlSession = factory.openSession();
-        return sqlSession;
+        return factory.openSession();
     }
 }

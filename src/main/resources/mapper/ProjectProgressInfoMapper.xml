@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jjou.mapper.ProjectProgressInfoMapper">
+
+    <insert id="insert">
+        INSERT INTO P_PROJECT_PROGRESS_INFO (
+            ID,
+            PROJECT_ID,
+            BEGIN_DATE,
+            END_DATE,
+            BEGIN_CHECK_DATE,
+            END_CHECK_DATE,
+            PLAN_DATE,
+            COMPLETE_DATE,
+            SETTLEMENT_DATE,
+            AMOUNT,
+            REMARK,
+            CREATOR,
+            CREATOR_NAME,
+            CREATE_TIME
+        ) VALUES (
+                             #{id},
+                             #{projectId},
+                             #{beginDate,jdbcType=DATE},
+                             #{endDate,jdbcType=DATE},
+                             #{beginCheckDate,jdbcType=DATE},
+                             #{endCheckDate,jdbcType=DATE},
+                             #{planDate,jdbcType=DATE},
+                             #{completeDate,jdbcType=DATE},
+                             #{settlementDate,jdbcType=DATE},
+                             #{amount,jdbcType=NUMERIC},
+                             #{remark,jdbcType=VARCHAR},
+                             #{creator,jdbcType=VARCHAR},
+                             #{creatorName,jdbcType=VARCHAR},
+                             #{createTime,jdbcType=DATE}
+                 )
+    </insert>
+
+    <update id="update">
+        UPDATE P_PROJECT_PROGRESS_INFO
+        <set>
+            <if test="beginDate != null">BEGIN_DATE = #{beginDate,jdbcType=DATE},</if>
+            <if test="endDate != null">END_DATE = #{endDate,jdbcType=DATE},</if>
+            <if test="beginCheckDate != null">BEGIN_CHECK_DATE = #{beginCheckDate,jdbcType=DATE},</if>
+            <if test="endCheckDate != null">END_CHECK_DATE = #{endCheckDate,jdbcType=DATE},</if>
+            <if test="planDate != null">PLAN_DATE = #{planDate,jdbcType=DATE},</if>
+            <if test="completeDate != null">COMPLETE_DATE = #{completeDate,jdbcType=DATE},</if>
+            <if test="settlementDate != null">SETTLEMENT_DATE = #{settlementDate,jdbcType=DATE},</if>
+        </set>
+        WHERE ID = #{id}
+    </update>
+
+    <select id="selectList" resultType="com.jjou.domain.ProjectProgress">
+        SELECT "PROJECT_ID", "AFTER_STATUS", "NEXT_DATE",CREATE_TIME,ID
+        FROM (SELECT PROJECT_ID,
+                     AFTER_STATUS,
+                     NEXT_DATE,CREATE_TIME,ID,
+                     ROW_NUMBER ()
+                             OVER (
+                                 PARTITION BY PROJECT_ID, AFTER_STATUS ORDER BY
+                                 CREATE_TIME DESC)
+                         AS ROWN
+              FROM P_PROJECT_PROGRESS
+              WHERE NEXT_DATE IS NOT NULL AND AFTER_STATUS IS NOT NULL)
+        WHERE ROWN = 1
+    </select>
+
+    <select id="selectById" resultType="com.jjou.domain.ProjectProgressInfo">
+        select * from P_PROJECT_PROGRESS_INFO where PROJECT_ID = #{projectId}
+    </select>
+
+    <select id="selectCount" resultType="java.lang.Integer">
+        select count(*) from
+            (SELECT "PROJECT_ID"
+             FROM (SELECT PROJECT_ID,
+                          AFTER_STATUS,
+                          NEXT_DATE,CREATE_TIME,ID,
+                          ROW_NUMBER ()
+                                  OVER (
+                                      PARTITION BY PROJECT_ID, AFTER_STATUS ORDER BY
+                                      CREATE_TIME DESC)
+                              AS ROWN
+                   FROM P_PROJECT_PROGRESS
+                   WHERE NEXT_DATE IS NOT NULL AND AFTER_STATUS IS NOT NULL)
+             WHERE ROWN = 1
+             group by "PROJECT_ID")
+    </select>
+
+</mapper>

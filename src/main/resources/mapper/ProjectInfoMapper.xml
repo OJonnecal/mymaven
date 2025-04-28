@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jjou.mapper.ProjectInfoMapper">
+
+
+    <update id="updateById">
+        UPDATE P_PROJECT_INFO
+        <set>
+            <if test="beginDate != null">BEGIN_DATE = #{beginDate,jdbcType=DATE},</if>
+            <if test="endDate != null">END_DATE = #{endDate,jdbcType=DATE},</if>
+            <if test="beginCheckDate != null">BEGIN_CHECK_DATE = #{beginCheckDate,jdbcType=DATE},</if>
+            <if test="endCheckDate != null">END_CHECK_DATE = #{endCheckDate,jdbcType=DATE},</if>
+            <if test="planDate != null">PLAN_DATE = #{planDate,jdbcType=DATE},</if>
+            <if test="completeDate != null">COMPLETE_DATE = #{completeDate,jdbcType=DATE},</if>
+            <if test="settlementDate != null">SETTLEMENT_DATE = #{settlementDate,jdbcType=DATE},</if>
+        </set>
+        WHERE ID = #{id}
+    </update>
+</mapper>
