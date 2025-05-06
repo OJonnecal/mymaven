@@ -54,25 +54,53 @@ public class ProjectProgressInfoTest {
                     if (StringUtils.isNotBlank(afterStatus)) {
                         switch (afterStatus) {
                             case "1":
-                                projectProgressInfoNew.setBeginDate(projectProgress.getNextDate());
+                                if (projectProgress.getNextDate() != null) {
+                                    projectProgressInfoNew.setBeginDate(projectProgress.getNextDate());
+                                } else {
+                                    projectProgressInfoNew.setBeginDate(projectProgress.getCreateTime());
+                                }
                                 break;
                             case "2":
-                                projectProgressInfoNew.setEndDate(projectProgress.getNextDate());
+                                if (projectProgress.getNextDate() != null) {
+                                    projectProgressInfoNew.setEndDate(projectProgress.getNextDate());
+                                } else {
+                                    projectProgressInfoNew.setEndDate(projectProgress.getCreateTime());
+                                }
                                 break;
                             case "3":
-                                projectProgressInfoNew.setBeginCheckDate(projectProgress.getNextDate());
+                                if (projectProgress.getNextDate() != null) {
+                                    projectProgressInfoNew.setBeginCheckDate(projectProgress.getNextDate());
+                                } else {
+                                    projectProgressInfoNew.setBeginCheckDate(projectProgress.getCreateTime());
+                                }
                                 break;
                             case "4":
-                                projectProgressInfoNew.setEndCheckDate(projectProgress.getNextDate());
+                                if (projectProgress.getNextDate() != null) {
+                                    projectProgressInfoNew.setEndCheckDate(projectProgress.getNextDate());
+                                } else {
+                                    projectProgressInfoNew.setEndCheckDate(projectProgress.getCreateTime());
+                                }
                                 break;
                             case "7":
-                                projectProgressInfoNew.setPlanDate(projectProgress.getNextDate());
+                                if (projectProgress.getNextDate() != null) {
+                                    projectProgressInfoNew.setPlanDate(projectProgress.getNextDate());
+                                } else {
+                                    projectProgressInfoNew.setPlanDate(projectProgress.getCreateTime());
+                                }
                                 break;
                             case "8":
-                                projectProgressInfoNew.setCompleteDate(projectProgress.getNextDate());
+                                if (projectProgress.getNextDate() != null) {
+                                    projectProgressInfoNew.setCompleteDate(projectProgress.getNextDate());
+                                } else {
+                                    projectProgressInfoNew.setCompleteDate(projectProgress.getCreateTime());
+                                }
                                 break;
                             case "5":
-                                projectProgressInfoNew.setSettlementDate(projectProgress.getNextDate());
+                                if (projectProgress.getNextDate() != null) {
+                                    projectProgressInfoNew.setSettlementDate(projectProgress.getNextDate());
+                                } else {
+                                    projectProgressInfoNew.setSettlementDate(projectProgress.getCreateTime());
+                                }
                                 break;
                             default:
                                 break;
@@ -87,25 +115,53 @@ public class ProjectProgressInfoTest {
                     if (StringUtils.isNotBlank(afterStatus)) {
                         switch (afterStatus) {
                             case "1":
-                                projectProgressInfo.setBeginDate(projectProgress.getNextDate());
+                                if(projectProgress.getNextDate() != null) {
+                                    projectProgressInfo.setBeginDate(projectProgress.getNextDate());
+                                }else{
+                                    projectProgressInfo.setBeginDate(projectProgress.getCreateTime());
+                                }
                                 break;
                             case "2":
-                                projectProgressInfo.setEndDate(projectProgress.getNextDate());
+                                if(projectProgress.getNextDate() != null) {
+                                    projectProgressInfo.setEndDate(projectProgress.getNextDate());
+                                }else{
+                                    projectProgressInfo.setEndDate(projectProgress.getCreateTime());
+                                }
                                 break;
                             case "3":
-                                projectProgressInfo.setBeginCheckDate(projectProgress.getNextDate());
+                                if(projectProgress.getNextDate() != null) {
+                                    projectProgressInfo.setBeginCheckDate(projectProgress.getNextDate());
+                                }else{
+                                    projectProgressInfo.setBeginCheckDate(projectProgress.getCreateTime());
+                                }
                                 break;
                             case "4":
-                                projectProgressInfo.setEndCheckDate(projectProgress.getNextDate());
+                                if(projectProgress.getNextDate() != null) {
+                                    projectProgressInfo.setEndCheckDate(projectProgress.getNextDate());
+                                }else{
+                                    projectProgressInfo.setEndCheckDate(projectProgress.getCreateTime());
+                                }
                                 break;
                             case "7":
-                                projectProgressInfo.setPlanDate(projectProgress.getNextDate());
+                                if(projectProgress.getNextDate() != null) {
+                                    projectProgressInfo.setPlanDate(projectProgress.getNextDate());
+                                }else{
+                                    projectProgressInfo.setPlanDate(projectProgress.getCreateTime());
+                                }
                                 break;
                             case "8":
-                                projectProgressInfo.setCompleteDate(projectProgress.getNextDate());
+                                if(projectProgress.getNextDate() != null) {
+                                    projectProgressInfo.setCompleteDate(projectProgress.getNextDate());
+                                }else{
+                                    projectProgressInfo.setCompleteDate(projectProgress.getCreateTime());
+                                }
                                 break;
                             case "5":
-                                projectProgressInfo.setSettlementDate(projectProgress.getNextDate());
+                                if(projectProgress.getNextDate() != null) {
+                                    projectProgressInfo.setSettlementDate(projectProgress.getNextDate());
+                                }else{
+                                    projectProgressInfo.setSettlementDate(projectProgress.getCreateTime());
+                                }
                                 break;
                             default:
                                 break;

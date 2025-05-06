@@ -51,18 +51,12 @@
     </update>
 
     <select id="selectList" resultType="com.jjou.domain.ProjectProgress">
-        SELECT "PROJECT_ID", "AFTER_STATUS", "NEXT_DATE",CREATE_TIME,ID
-        FROM (SELECT PROJECT_ID,
-                     AFTER_STATUS,
-                     NEXT_DATE,CREATE_TIME,ID,
-                     ROW_NUMBER ()
-                             OVER (
-                                 PARTITION BY PROJECT_ID, AFTER_STATUS ORDER BY
-                                 CREATE_TIME DESC)
-                         AS ROWN
-              FROM P_PROJECT_PROGRESS
-              WHERE NEXT_DATE IS NOT NULL AND AFTER_STATUS IS NOT NULL)
-        WHERE ROWN = 1
+        SELECT PROJECT_ID,
+               AFTER_STATUS,
+               NEXT_DATE,
+               CREATE_TIME,
+               ID
+        FROM P_PROJECT_PROGRESS
     </select>
 
     <select id="selectById" resultType="com.jjou.domain.ProjectProgressInfo">
@@ -72,17 +66,7 @@
     <select id="selectCount" resultType="java.lang.Integer">
         select count(*) from
             (SELECT "PROJECT_ID"
-             FROM (SELECT PROJECT_ID,
-                          AFTER_STATUS,
-                          NEXT_DATE,CREATE_TIME,ID,
-                          ROW_NUMBER ()
-                                  OVER (
-                                      PARTITION BY PROJECT_ID, AFTER_STATUS ORDER BY
-                                      CREATE_TIME DESC)
-                              AS ROWN
-                   FROM P_PROJECT_PROGRESS
-                   WHERE NEXT_DATE IS NOT NULL AND AFTER_STATUS IS NOT NULL)
-             WHERE ROWN = 1
+             FROM P_PROJECT_PROGRESS
              group by "PROJECT_ID")
     </select>
 
